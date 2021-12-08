@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.devtools.remote.restart.enabled",
+      "type": "java.lang.String",
+      "description": "Description for spring.devtools.remote.restart.enabled."
+  }
+] }
