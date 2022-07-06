@@ -1,12 +1,14 @@
 package com.dailynews.Newsdaily.domen;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class NewsComments {
+public class NewsComments implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,13 +16,13 @@ public class NewsComments {
     private String comment;
     private Date updatedTime;
     private Date createdTime;
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "news_id", nullable = false)
-    private News news;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "news_id",nullable = false)
+    private News news;
+    //@JsonIgnore
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "user_id",nullable = false)
     private User user;
     private boolean isActive;
     @JsonIgnore

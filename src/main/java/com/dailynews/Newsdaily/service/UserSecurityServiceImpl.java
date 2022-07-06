@@ -17,7 +17,7 @@ public class UserSecurityServiceImpl implements UserSecurityService {
     private final UserDetailsService userDetailsService;
 
 
-    public UserSecurityServiceImpl(@Qualifier("userdetailsservice") UserDetailsService userDetailsService) {
+    public UserSecurityServiceImpl( UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 

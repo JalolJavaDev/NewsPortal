@@ -9,12 +9,11 @@ import java.util.Optional;
 public interface UserService {
      User create(User user);
 
-    Optional<User> findByUsername(String username);
+    User findByUser(String admin);
 
     User findByEmail(String email);
 
-    boolean verifyingUser(User id, String token);
     Boolean checkUserName(String userName);
-  //  User getByLogin(String username);
+
 
 }

@@ -13,12 +13,10 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
-    @PersistenceContext
-    private EntityManager entityManager;
 
-    public RoleServiceImpl(RoleRepository roleRepository, EntityManager entityManager) {
+
+    public RoleServiceImpl(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
-        this.entityManager = entityManager;
     }
 
 

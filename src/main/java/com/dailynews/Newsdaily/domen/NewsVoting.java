@@ -2,7 +2,7 @@ package com.dailynews.Newsdaily.domen;
 import javax.persistence.*;
 
 @Entity
-public class NewsVoting {
+public class  NewsVoting {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

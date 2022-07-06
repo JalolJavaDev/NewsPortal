@@ -4,5 +4,15 @@
       "name": "spring.devtools.remote.restart.enabled",
       "type": "java.lang.String",
       "description": "Description for spring.devtools.remote.restart.enabled."
-  }
-] }
+    },
+    {
+      "name": "jwt.token.secret",
+      "type": "java.lang.String",
+      "description": "Description for jwt.token.secret."
+    },
+    {
+      "name": "jwt.token.secret",
+      "type": "java.lang.String",
+      "description": "Description for jwt.token.secret."
+    }
+  ] }

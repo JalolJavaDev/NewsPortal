@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -11,29 +12,48 @@ public class NewsImage implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long imageId;
     private String imageSource;
-    @JsonIgnore
-    private Date imageCreationDTM;
-    @JsonIgnore
+    private String contentType;
+    private long contentSize;
+    private String url;
+    private Instant imageCreationDTM=Instant.now();
+
     private Date imageUpdationDTM;
     @JsonIgnore
     private boolean isActive;
+
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "newsid")
     private News news;
-
+    @Lob
+    private byte[] data;
     public NewsImage() {
     }
 
-    public NewsImage(String imageSource, boolean isActive, Date imageCreationDTM, Date imageUpdationDTM, News news) {
+    public NewsImage(String imageSource,String url, boolean isActive, Instant imageCreationDTM, Date imageUpdationDTM, News news) {
         this.imageSource = imageSource;
         this.imageCreationDTM = imageCreationDTM;
         this.imageUpdationDTM = imageUpdationDTM;
         this.isActive = isActive;
         this.news = news;
+        this.url=url;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
     }
 
     public Long getImageId() {
@@ -52,11 +72,11 @@ public class NewsImage implements Serializable {
         this.imageSource = imageSource;
     }
 
-    public Date getImageCreationDTM() {
+    public Instant getImageCreationDTM() {
         return imageCreationDTM;
     }
 
-    public void setImageCreationDTM(Date imageCreationDTM) {
+    public void setImageCreationDTM(Instant imageCreationDTM) {
         this.imageCreationDTM = imageCreationDTM;
     }
 
@@ -83,4 +103,21 @@ public class NewsImage implements Serializable {
     public void setNews(News news) {
         this.news = news;
     }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public long getContentSize() {
+        return contentSize;
+    }
+
+    public void setContentSize(long contentSize) {
+        this.contentSize = contentSize;
+    }
 }
+

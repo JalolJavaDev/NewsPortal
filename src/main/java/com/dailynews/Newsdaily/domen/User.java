@@ -21,12 +21,10 @@ public class User implements Serializable {
     @NotNull
     private String username;
     private String password;
-    //private String confirmPassword;
+
     private boolean userStatus;
     private Date created;
     private Date updated;
-
-
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -39,7 +37,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<NewsVoting> newsVoting;
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<NewsComments> newsComments;
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)

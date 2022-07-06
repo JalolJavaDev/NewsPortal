@@ -1,5 +1,6 @@
 package com.dailynews.Newsdaily.service;
 import com.dailynews.Newsdaily.domen.News;
+import com.dailynews.Newsdaily.domen.NewsCategoriesAndSubCategories;
 import com.dailynews.Newsdaily.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -10,6 +11,7 @@ import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -40,19 +42,29 @@ public class NewsServicesImpl implements NewsServices {
         Page<News> page=newsRepository.findAll(pageable);
         return page;
     }
-    @Override
+   /* @Override
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
-    public News findByTitle(String title){
-        return newsRepository.getfindByTitl(title);
-    }
+    public News findByTitle(String newsTitle){
+        return newsRepository.findByNewsTitle(newsTitle);
+    }*/
 
-    public void delete(Long id){
+    @Override
+    public void delete(long id) {
         newsRepository.deleteById(id);
     }
 
+
+
     @Override
     public News makeNews(News news) {
-return newsRepository.save(news);
+news.setCreationDTM(new java.util.Date());
+news.setActive(true);
+        return newsRepository.save(news);
+    }
+
+    @Override
+    public News findByNewsTitle(String newsTitle) {
+return newsRepository.findByNewsTitle(newsTitle);
     }
 
 
@@ -66,9 +78,6 @@ return newsRepository.save(news);
         return news.getNewsId();
     }*/
 
-    @Override
-    public void deleteById(long id) {
-        newsRepository.deleteById(id);
-    }
+
 
 }

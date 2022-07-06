@@ -42,7 +42,8 @@ public class NewsVotingRepositoryImpl implements NewsVotingRepository {
 
     @Override
     public boolean downVoteCounting(Long userId, Long newsId) {
-        Query query = entityManager.createQuery("select u from NewsVoting u where u.news.newsId=:newsId and u.user.id=:userId", NewsVoting.class);
+        Query query = entityManager.createQuery(
+                "select u from NewsVoting u where u.news.newsId=:newsId and u.user.id=:userId", NewsVoting.class);
         query.setParameter("userId", userId);
         query.setParameter("newsId", newsId);
         try {

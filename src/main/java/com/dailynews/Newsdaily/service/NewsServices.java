@@ -10,8 +10,8 @@ import java.util.List;
 public interface NewsServices  {
     News findOne(Long id);
     Page<News> findAll(Pageable pageable);
-    News  makeNews(News news);
-    News findByTitle(String title);
-    void deleteById(long id);
+    News  makeNews(News news );
+    News findByNewsTitle(String newsTitle);
+    void delete(long id);
 
 }

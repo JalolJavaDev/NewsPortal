@@ -8,15 +8,14 @@ import java.util.List;
 
 
 public interface NewsRepository  extends JpaRepository<News,Long> {
-    List<News> findAllNews();
 
     News findById(long id);
 
-    News findBygetTitl(String title);
+    News findByNewsTitle(String newsTitle);
 
     void deleteById(long id);
 
-    List<Users> showAllUsers();
+   // List<Users> showAllUsers();
 
 
 }

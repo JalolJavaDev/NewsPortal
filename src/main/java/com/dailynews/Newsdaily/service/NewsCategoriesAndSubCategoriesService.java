@@ -1,36 +1,27 @@
 package com.dailynews.Newsdaily.service;
 import com.dailynews.Newsdaily.domen.News;
 import com.dailynews.Newsdaily.domen.NewsCategoriesAndSubCategories;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface NewsCategoriesAndSubCategoriesService {
 
-    List<NewsCategoriesAndSubCategories> findAllNewsCategory();
+    NewsCategoriesAndSubCategories findOne(Long id);
+    Page<NewsCategoriesAndSubCategories> findAll(Pageable pageable);
 
-    NewsCategoriesAndSubCategories findById(long id);
-
-    void saveNewsCategory(NewsCategoriesAndSubCategories newsCategoriesAndSubCategories);
-
-    void deleteById(long id);
-
-    List<NewsCategoriesAndSubCategories> showCategoriesInMenuBar();
+    NewsCategoriesAndSubCategories addNewsCategory(NewsCategoriesAndSubCategories newsCategoriesAndSubCategories);
+    NewsCategoriesAndSubCategories updNewsCategory(NewsCategoriesAndSubCategories newsCategoriesAndSubCategories);
+//NewsCategoriesAndSubCategories getAllCategoryByName (String categoryName);
+    //List<NewsCategoriesAndSubCategories> getAllCategoriesByName(String categoryName);
+    void delete(long id);
 
     List<News> findByCategoryName(String categoryName);
 
-    List<NewsCategoriesAndSubCategories> findAllSubCategory();
+    Boolean checkCategoryName(String categoryName);
 
-    List<NewsCategoriesAndSubCategories> findSubCategoryChildBySubCategoryName(String subCategoryChild);
-
-    NewsCategoriesAndSubCategories findBySubCategoryId(int subCategoryId);
-
-    List<NewsCategoriesAndSubCategories> findSubCategoryByCategoryId(int categoryId);
-
-    boolean saveNewsSubCategory(NewsCategoriesAndSubCategories newsSubCategory);
-
-    boolean deleteById(int id);
-
-    NewsCategoriesAndSubCategories findBySubCategoryName(String subCategoryName);
-
-    List<NewsCategoriesAndSubCategories> findNewsSubCategoriesByCategoryName(String categoryName);
+    //List<NewsCategoriesAndSubCategories> getAllCategoriesByName(String categoryName);
 }

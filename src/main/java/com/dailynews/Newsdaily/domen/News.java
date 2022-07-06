@@ -1,9 +1,11 @@
 package com.dailynews.Newsdaily.domen;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -16,14 +18,25 @@ public class News implements Serializable {
     private long newsId;
     private String newsHeading;
     private String newsTitle;
+
+    public Date getCreationDTM() {
+        return creationDTM;
+    }
+
+    public void setCreationDTM(Date creationDTM) {
+        this.creationDTM = creationDTM;
+    }
+
     @Lob
     @Column(columnDefinition = "TEXT")
     private String newsDescription;
     private String newsTeaser;
     private Date creationDTM;
+   // private Date creationDTM;
     private Date updationDTM;
     private boolean isActive;
     @OneToMany(mappedBy = "news", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<NewsImage> image;
     @JsonIgnore
     @OneToOne(mappedBy = "news", cascade = CascadeType.REMOVE)
@@ -32,13 +45,11 @@ public class News implements Serializable {
     @OneToMany(mappedBy = "news", cascade = CascadeType.REMOVE)
     private List<NewsVoting> newsVoting;
     @JsonIgnore
-    @OneToMany(mappedBy = "news", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "news", cascade = CascadeType.ALL)
     private List<NewsComments> newsComments;
-
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "categories_and_sub_categories_id")
-    private NewsCategoriesAndSubCategories categoriesAndSubCategories;
+    private NewsCategoriesAndSubCategories newsCategoriesAndSubCategories;
 
     public News() {
     }
@@ -47,12 +58,12 @@ public class News implements Serializable {
         this.newsId = newsId;
     }
 
-    public News(String newsHeading, String newsTitle, String newsDescription, String newsTeaser, Date creationDTM, Date updationDTM, boolean isActive) {
+    public News(String newsHeading, String newsTitle, String newsDescription, String newsTeaser,Date creationDTM, Date updationDTM, boolean isActive) {
         this.newsHeading = newsHeading;
         this.newsTitle = newsTitle;
         this.newsDescription = newsDescription;
         this.newsTeaser = newsTeaser;
-        this.creationDTM = creationDTM;
+        this.creationDTM=creationDTM;
         this.updationDTM = updationDTM;
         this.isActive = isActive;
     }
@@ -97,14 +108,6 @@ public class News implements Serializable {
         this.newsTeaser = newsTeaser;
     }
 
-    public Date getCreationDTM() {
-        return creationDTM;
-    }
-
-    public void setCreationDTM(Date creationDTM) {
-        this.creationDTM = creationDTM;
-    }
-
     public Date getUpdationDTM() {
         return updationDTM;
     }
@@ -129,6 +132,14 @@ public class News implements Serializable {
         this.image = image;
     }
 
+    public Views getViews() {
+        return views;
+    }
+
+    public void setViews(Views views) {
+        this.views = views;
+    }
+
     public List<NewsVoting> getNewsVoting() {
         return newsVoting;
     }
@@ -145,12 +156,12 @@ public class News implements Serializable {
         this.newsComments = newsComments;
     }
 
-    public NewsCategoriesAndSubCategories getCategoriesAndSubCategories() {
-        return categoriesAndSubCategories;
+    public NewsCategoriesAndSubCategories getNewsCategoriesAndSubCategories() {
+        return newsCategoriesAndSubCategories;
     }
 
-    public void setCategoriesAndSubCategories(NewsCategoriesAndSubCategories categoriesAndSubCategories) {
-        this.categoriesAndSubCategories = categoriesAndSubCategories;
+    public void setNewsCategoriesAndSubCategories(NewsCategoriesAndSubCategories newsCategoriesAndSubCategories) {
+        this.newsCategoriesAndSubCategories = newsCategoriesAndSubCategories;
     }
 
     @Override
@@ -168,7 +179,8 @@ public class News implements Serializable {
                 ", views=" + views +
                 ", newsVoting=" + newsVoting +
                 ", newsComments=" + newsComments +
-                ", categoriesAndSubCategories=" + categoriesAndSubCategories +
+                ", newsCategoriesAndSubCategories =" + newsCategoriesAndSubCategories +
                 '}';
     }
+
 }
